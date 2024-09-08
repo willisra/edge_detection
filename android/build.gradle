@@ -27,7 +27,21 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 34
-    namespace = "com.sample.edgedetection"
+    if (project.android.hasProperty('namespace')) {
+        namespace 'com.sample.edgedetection'
+    }
+
+    compileSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -39,12 +53,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    compileOptions{
-        coreLibraryDesugaringEnabled  true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
 }
 
 dependencies {
